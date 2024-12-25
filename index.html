@@ -4,45 +4,209 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Paper Review System</title>
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+        .star-button {
+            margin-bottom: 20px;
+            padding: 10px 20px;
+            background-color: #f1c40f;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+        }
+        .star-button:hover {
+            background-color: #f39c12;
+        }
+        .date-list {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .date-item {
+            width: 30%;
+            margin: 1.5%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .paper-item {
+            margin-bottom: 20px;
+        }
+        .paper-thumbnail {
+            position: relative;
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+            border-radius: 5px;
+        }
+        .paper-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .comment-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow-y: auto;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 10px;
+            display: none;
+        }
+        .comment-overlay.active {
+            display: block;
+        }
+        .comment-item {
+            margin-bottom: 10px;
+            padding: 5px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+        }
+        .comment-item img {
+            max-width: 100px;
+            max-height: 100px;
+            margin-top: 5px;
+        }
+        .toggle-comments {
+            margin-top: 10px;
+            cursor: pointer;
+            color: blue;
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
         <!-- Star Button -->
         <div class="star-button">
-            <a href="https://github.com/WayneJin0918/SOTA-paper-rating.io?star=1" target="_blank">
+            <a href="https://github.com/WayneJin0918/SOTA-paper-rating.io" target="_blank">
                 ⭐ Star this Repository
             </a>
             <span id="star-count">Loading Stars...</span>
         </div>
 
+        <!-- Content Area -->
         <h1>Paper Review System</h1>
-        <div class="paper-list">
-            <!-- Paper 1 -->
-            <div class="paper-item" data-paper-id="1">
-                <img src="images/paper1-thumbnail.jpg" alt="Paper 1 Thumbnail" class="paper-thumbnail">
-                <h2 class="paper-title">Paper Title 1</h2>
-                <div class="paper-rating">
-                    <span>Rating: </span>
-                    <span class="stars">★★★★☆</span>
-                </div>
-                <a href="https://github.com/yourusername/paper1-code" class="code-link" target="_blank">View Code</a>
-            </div>
-
-            <!-- Paper 2 -->
-            <div class="paper-item" data-paper-id="2">
-                <img src="images/paper2-thumbnail.jpg" alt="Paper 2 Thumbnail" class="paper-thumbnail">
-                <h2 class="paper-title">Paper Title 2</h2>
-                <div class="paper-rating">
-                    <span>Rating: </span>
-                    <span class="stars">★★★☆☆</span>
-                </div>
-                <a href="https://github.com/yourusername/paper2-code" class="code-link" target="_blank">View Code</a>
-            </div>
-
-            <!-- Add more papers -->
-        </div>
+        <ul id="date-list" class="date-list"></ul>
     </div>
-    <script src="script.js"></script>
+
+    <script>
+        // Sample papers data
+        const papers = {
+            '24-1-1': [
+                { id: '1', title: 'Paper Title 1', rating: '★★★★☆', codeLink: 'https://github.com/yourusername/paper1-code', thumbnail: 'images/paper1-thumbnail.jpg' },
+                { id: '2', title: 'Paper Title 2', rating: '★★★☆☆', codeLink: 'https://github.com/yourusername/paper2-code', thumbnail: 'images/paper2-thumbnail.jpg' }
+            ],
+            '24-1-2': [
+                { id: '3', title: 'Paper Title 3', rating: '★★★★★', codeLink: 'https://github.com/yourusername/paper3-code', thumbnail: 'images/paper3-thumbnail.jpg' }
+            }
+            // Add more dates and papers as needed
+        };
+
+        // Initialize comments from localStorage
+        let comments = JSON.parse(localStorage.getItem('comments')) || {};
+
+        // Get elements
+        const dateList = document.getElementById('date-list');
+
+        // Function to generate date list based on selected month
+        function generateDateList(month) {
+            dateList.innerHTML = '';
+            // Assume 31 days for simplicity; adjust as needed
+            for (let day = 1; day <= 31; day++) {
+                const dateKey = `24-${month}-${day}`;
+                const paperList = papers[dateKey] || [];
+                const dateItem = document.createElement('li');
+                dateItem.className = 'date-item';
+
+                const dateH3 = document.createElement('h3');
+                dateH3.textContent = `${month}-${day}`;
+                dateItem.appendChild(dateH3);
+
+                if (paperList.length > 0) {
+                    paperList.forEach(paper => {
+                        const paperDiv = document.createElement('div');
+                        paperDiv.className = 'paper-item';
+
+                        // Paper thumbnail
+                        const thumbnailDiv = document.createElement('div');
+                        thumbnailDiv.className = 'paper-thumbnail';
+                        const thumbnailImg = document.createElement('img');
+                        thumbnailImg.src = paper.thumbnail;
+                        thumbnailImg.alt = paper.title;
+                        thumbnailDiv.appendChild(thumbnailImg);
+
+                        // Comment overlay
+                        const commentOverlay = document.createElement('div');
+                        commentOverlay.className = 'comment-overlay';
+                        const commentsDisplay = document.createElement('div');
+                        commentsDisplay.className = 'comments-display';
+                        commentOverlay.appendChild(commentsDisplay);
+                        thumbnailDiv.appendChild(commentOverlay);
+
+                        // Toggle comments button
+                        const toggleComments = document.createElement('div');
+                        toggleComments.className = 'toggle-comments';
+                        toggleComments.textContent = 'Show Comments';
+                        toggleComments.addEventListener('click', function() {
+                            commentOverlay.classList.toggle('active');
+                            toggleComments.textContent = commentOverlay.classList.contains('active') ? 'Hide Comments' : 'Show Comments';
+                        });
+
+                        // Append elements
+                        paperDiv.appendChild(thumbnailDiv);
+                        paperDiv.appendChild(toggleComments);
+                        dateItem.appendChild(paperDiv);
+
+                        // Display comments
+                        displayComments(paper.id, commentsDisplay);
+                    });
+                } else {
+                    const noPapersDiv = document.createElement('div');
+                    noPapersDiv.textContent = 'No papers available for this day.';
+                    dateItem.appendChild(noPapersDiv);
+                }
+
+                dateList.appendChild(dateItem);
+            }
+        }
+
+        // Function to display comments for a paper
+        function displayComments(paperId, commentsDisplay) {
+            const paperComments = comments[paperId] || [];
+            commentsDisplay.innerHTML = '';
+            paperComments.forEach(comment => {
+                const commentDiv = document.createElement('div');
+                commentDiv.className = 'comment-item';
+                commentDiv.textContent = comment.text;
+                if (comment.image) {
+                    const img = document.createElement('img');
+                    img.src = comment.image;
+                    commentDiv.appendChild(img);
+                }
+                commentsDisplay.appendChild(commentDiv);
+            });
+        }
+
+        // Initialize with the first month
+        generateDateList('1');
+    </script>
 </body>
 </html>
