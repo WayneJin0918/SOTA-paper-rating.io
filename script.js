@@ -11,6 +11,13 @@ document.addEventListener("DOMContentLoaded", function () {
             const selectedDate = this.getAttribute('data-date');
             console.log(`Selected Date: ${selectedDate}`); // 调试信息
 
+            // 移除所有日期过滤选项的高亮样式
+            dateFilterLinks.forEach(link => link.classList.remove('active'));
+
+            // 为当前点击的选项添加高亮样式
+            this.classList.add('active');
+
+            // 过滤论文列表
             paperItems.forEach(item => {
                 const itemDate = item.getAttribute('data-date');
                 const itemYearMonth = itemDate.slice(0, 7); // Extract YYYY-MM
@@ -24,6 +31,9 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         });
     });
+
+    // 默认选中 "All" 选项
+    document.querySelector('#date-filter a[data-date="all"]').classList.add('active');
 
     // GitHub Star Count Functionality
     const starCount = document.getElementById("star-count");
