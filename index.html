@@ -96,6 +96,64 @@
             </div>
         </div>
     </div>
-    <script src="script.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const dateFilterLinks = document.querySelectorAll('#date-filter a');
+            const paperItems = document.querySelectorAll('.paper-item');
+
+            // 从 localStorage 中获取选中的日期
+            const selectedDate = localStorage.getItem('selectedDate') || 'all';
+
+            // 设置初始高亮状态
+            dateFilterLinks.forEach(link => {
+                if (link.getAttribute('data-date') === selectedDate) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+
+            // 过滤论文列表
+            paperItems.forEach(item => {
+                const itemDate = item.getAttribute('data-date');
+                const itemYearMonth = itemDate.slice(0, 7); // Extract YYYY-MM
+
+                if (selectedDate === 'all' || selectedDate === itemYearMonth) {
+                    item.style.display = 'block'; // Show the item
+                } else {
+                    item.style.display = 'none'; // Hide the item
+                }
+            });
+
+            // 监听日期过滤选项的点击事件
+            dateFilterLinks.forEach(link => {
+                link.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const selectedDate = this.getAttribute('data-date');
+
+                    // 保存选中的日期到 localStorage
+                    localStorage.setItem('selectedDate', selectedDate);
+
+                    // 移除所有选项的高亮样式
+                    dateFilterLinks.forEach(link => link.classList.remove('active'));
+
+                    // 为当前点击的选项添加高亮样式
+                    this.classList.add('active');
+
+                    // 过滤论文列表
+                    paperItems.forEach(item => {
+                        const itemDate = item.getAttribute('data-date');
+                        const itemYearMonth = itemDate.slice(0, 7); // Extract YYYY-MM
+
+                        if (selectedDate === 'all' || selectedDate === itemYearMonth) {
+                            item.style.display = 'block'; // Show the item
+                        } else {
+                            item.style.display = 'none'; // Hide the item
+                        }
+                    });
+                });
+            });
+        });
+    </script>
 </body>
 </html>
