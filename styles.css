@@ -98,6 +98,14 @@ body {
     border-radius: 5px; /* 圆角 */
 }
 
+/* 默认样式 */
+.date-link {
+    text-decoration: none; /* 去掉下划线 */
+    color: #333; /* 默认文字颜色 */
+    padding: 5px 10px; /* 内边距 */
+    display: inline-block; /* 使链接可以设置宽度和高度 */
+}
+
 .star-button a {
     display: inline-block; /* 使链接可以设置宽度和高度 */
     padding: 10px 20px; /* 内边距 */
