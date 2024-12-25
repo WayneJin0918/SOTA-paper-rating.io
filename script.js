@@ -1,4 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
+    console.log("DOM fully loaded and parsed"); // 调试信息
+
     // Date Filter Functionality
     const dateFilterLinks = document.querySelectorAll('#date-filter a');
     const paperItems = document.querySelectorAll('.paper-item');
@@ -7,10 +9,12 @@ document.addEventListener("DOMContentLoaded", function () {
         link.addEventListener('click', function (e) {
             e.preventDefault();
             const selectedDate = this.getAttribute('data-date');
+            console.log(`Selected Date: ${selectedDate}`); // 调试信息
 
             paperItems.forEach(item => {
                 const itemDate = item.getAttribute('data-date');
-                const itemYearMonth = itemDate.slice(0, 7); // Extract YYYY-MM from the date
+                const itemYearMonth = itemDate.slice(0, 7); // Extract YYYY-MM
+                console.log(`Item Date: ${itemDate}, Filter Date: ${selectedDate}`); // 调试信息
 
                 if (selectedDate === 'all' || selectedDate === itemYearMonth) {
                     item.style.display = 'block'; // Show the item
@@ -25,7 +29,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const starCount = document.getElementById("star-count");
 
     // GitHub repository information
-    const repoOwner = "WayneJin0918"; // Replace with your GitHub username
+    const repoOwner = "yourusername"; // Replace with your GitHub username
     const repoName = "SOTA-paper-rating.io"; // Replace with your repository name
 
     // Function to get the star count
