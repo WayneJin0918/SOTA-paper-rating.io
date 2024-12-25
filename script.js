@@ -1,4 +1,27 @@
 document.addEventListener("DOMContentLoaded", function () {
+    // Date Filter Functionality
+    const dateFilterLinks = document.querySelectorAll('#date-filter a');
+    const paperItems = document.querySelectorAll('.paper-item');
+
+    dateFilterLinks.forEach(link => {
+        link.addEventListener('click', function (e) {
+            e.preventDefault();
+            const selectedDate = this.getAttribute('data-date');
+
+            paperItems.forEach(item => {
+                const itemDate = item.getAttribute('data-date');
+                const itemYearMonth = itemDate.slice(0, 7); // Extract YYYY-MM from the date
+
+                if (selectedDate === 'all' || selectedDate === itemYearMonth) {
+                    item.style.display = 'block'; // Show the item
+                } else {
+                    item.style.display = 'none'; // Hide the item
+                }
+            });
+        });
+    });
+
+    // GitHub Star Count Functionality
     const starCount = document.getElementById("star-count");
 
     // GitHub repository information
