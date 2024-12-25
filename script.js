@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const starCount = document.getElementById("star-count");
 
     // GitHub repository information
-    const repoOwner = "yourusername"; // Replace with your GitHub username
+    const repoOwner = "WayneJin0918"; // Replace with your GitHub username
     const repoName = "SOTA-paper-rating.io"; // Replace with your repository name
 
     // Function to get the star count
