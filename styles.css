@@ -88,4 +88,12 @@ body {
 
 .code-link:hover {
     text-decoration: underline;
+
+/* 高亮样式 */
+.date-link.active {
+    background-color: #007bff; /* 蓝色背景 */
+    color: white; /* 白色文字 */
+    padding: 5px 10px; /* 内边距 */
+    border-radius: 5px; /* 圆角 */
+}
 }
