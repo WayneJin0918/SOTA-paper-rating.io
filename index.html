@@ -5,6 +5,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SOTA Paper Recommendation</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        /* 高亮样式 */
+        .date-link.active {
+            background-color: #007bff; /* 蓝色背景 */
+            color: white; /* 白色文字 */
+            padding: 5px 10px; /* 内边距 */
+            border-radius: 5px; /* 圆角 */
+        }
+
+        /* 默认样式 */
+        .date-link {
+            text-decoration: none; /* 去掉下划线 */
+            color: #333; /* 默认文字颜色 */
+            padding: 5px 10px; /* 内边距 */
+            display: inline-block; /* 使链接可以设置宽度和高度 */
+        }
+
+        /* 悬停效果 */
+        .date-link:hover {
+            background-color: #f0f0f0; /* 浅灰色背景 */
+            color: #007bff; /* 蓝色文字 */
+        }
+
+        /* 论文列表样式 */
+        .paper-item {
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .paper-item.hidden {
+            display: none; /* 隐藏不符合条件的论文 */
+        }
+    </style>
 </head>
 <body>
     <div class="container">
