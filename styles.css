@@ -56,7 +56,7 @@ body {
 }
 
 .paper-thumbnail {
-    max-width: 100px;
+    max-width: 1000px;
     height: auto;
     margin-bottom: 10px;
 }
