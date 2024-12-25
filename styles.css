@@ -88,6 +88,7 @@ body {
 
 .code-link:hover {
     text-decoration: underline;
+}
 
 /* 高亮样式 */
 .date-link.active {
@@ -96,4 +97,28 @@ body {
     padding: 5px 10px; /* 内边距 */
     border-radius: 5px; /* 圆角 */
 }
+
+.star-button a {
+    display: inline-block; /* 使链接可以设置宽度和高度 */
+    padding: 10px 20px; /* 内边距 */
+    background-color: #1a73e8; /* 背景颜色 */
+    color: white; /* 文字颜色 */
+    text-decoration: none; /* 去掉下划线 */
+    font-size: 16px; /* 字体大小 */
+    font-weight: bold; /* 字体加粗 */
+    border-radius: 5px; /* 圆角 */
+    border: 2px solid #1a73e8; /* 边框 */
+    transition: background-color 0.3s ease, color 0.3s ease; /* 过渡效果 */
 }
+
+.star-button a:hover {
+    background-color: white; /* 悬停时背景颜色 */
+    color: #1a73e8; /* 悬停时文字颜色 */
+    border-color: #1a73e8; /* 悬停时边框颜色 */
+}
+
+.star-button a:active {
+    background-color: #1557b0; /* 点击时背景颜色 */
+    color: white; /* 点击时文字颜色 */
+}
+
