@@ -3,44 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Paper Review System</title>
+    <title>SOTA Paper Recommendation</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
-        <!-- Star Button -->
-        <div class="star-button">
-            <a href="https://github.com/yourusername/paper-review-website?star=1" target="_blank">
-                ⭐ Star this Repository
-            </a>
-            <span id="star-count">Loading Stars...</span>
+        <!-- Sidebar for Date Selection -->
+        <div class="sidebar">
+            <h3>Filter by Date</h3>
+            <ul id="date-filter">
+                <li><a href="#" data-date="all">All</a></li>
+                <li><a href="#" data-date="2023-10-01">October 2023</a></li>
+                <li><a href="#" data-date="2023-09-01">September 2023</a></li>
+                <!-- Add more dates as needed -->
+            </ul>
         </div>
 
-        <h1>Paper Review System</h1>
-        <div class="paper-list">
-            <!-- Paper 1 -->
-            <div class="paper-item" data-paper-id="1">
-                <img src="images/paper1-thumbnail.jpg" alt="Paper 1 Thumbnail" class="paper-thumbnail">
-                <h2 class="paper-title">Paper Title 1</h2>
-                <div class="paper-rating">
-                    <span>Rating: </span>
-                    <span class="stars">★★★★☆</span>
-                </div>
-                <a href="https://github.com/yourusername/paper1-code" class="code-link" target="_blank">View Code</a>
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Star Button -->
+            <div class="star-button">
+                <a href="https://github.com/yourusername/paper-review-website?star=1" target="_blank">
+                    ⭐ Star this Repository
+                </a>
+                <span id="star-count">Loading Stars...</span>
             </div>
 
-            <!-- Paper 2 -->
-            <div class="paper-item" data-paper-id="2">
-                <img src="images/paper2-thumbnail.jpg" alt="Paper 2 Thumbnail" class="paper-thumbnail">
-                <h2 class="paper-title">Paper Title 2</h2>
-                <div class="paper-rating">
-                    <span>Rating: </span>
-                    <span class="stars">★★★☆☆</span>
+            <h1>Paper Review System</h1>
+            <div class="paper-list">
+                <!-- Paper 1 -->
+                <div class="paper-item" data-paper-id="1" data-date="2023-10-01">
+                    <img src="images/paper1-thumbnail.jpg" alt="Paper 1 Thumbnail" class="paper-thumbnail">
+                    <h2 class="paper-title">Paper Title 1</h2>
+                    <div class="paper-rating">
+                        <span>Rating: </span>
+                        <span class="stars">★★★★☆</span>
+                    </div>
+                    <div class="paper-review">
+                        <h3>Your Review</h3>
+                        <textarea class="review-text" placeholder="Write your review here..."></textarea>
+                        <button class="submit-review">Submit Review</button>
+                    </div>
+                    <a href="https://github.com/yourusername/paper1-code" class="code-link" target="_blank">View Code</a>
                 </div>
-                <a href="https://github.com/yourusername/paper2-code" class="code-link" target="_blank">View Code</a>
-            </div>
 
-            <!-- Add more papers -->
+                <!-- Paper 2 -->
+                <div class="paper-item" data-paper-id="2" data-date="2023-09-01">
+                    <img src="images/paper2-thumbnail.jpg" alt="Paper 2 Thumbnail" class="paper-thumbnail">
+                    <h2 class="paper-title">Paper Title 2</h2>
+                    <div class="paper-rating">
+                        <span>Rating: </span>
+                        <span class="stars">★★★☆☆</span>
+                    </div>
+                    <div class="paper-review">
+                        <h3>Your Review</h3>
+                        <textarea class="review-text" placeholder="Write your review here..."></textarea>
+                        <button class="submit-review">Submit Review</button>
+                    </div>
+                    <a href="https://github.com/yourusername/paper2-code" class="code-link" target="_blank">View Code</a>
+                </div>
+
+                <!-- Add more papers -->
+            </div>
         </div>
     </div>
     <script src="script.js"></script>
