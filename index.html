@@ -6,27 +6,51 @@
     <title>SOTA Paper Recommendation</title>
     <link rel="stylesheet" href="styles.css">
     <style>
-
         .maintainers {
-          display: flex;
-          justify-content: center;
-          gap: 20px; 
+            display: block;
+            justify-content: center;
+            gap: 30px; /* 增加间距 */
+            padding: 20px;
+            background-color: #f9f9f9; /* 添加背景颜色 */
+            border-radius: 10px; /* 圆角 */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 添加阴影 */
+            margin: 20px auto; /* 居中并增加外边距 */
+            max-width: 800px; /* 限制最大宽度 */
         }
         
         .maintainer {
-          text-align: center;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease; /* 添加过渡效果 */
+        }
+        
+        .maintainer:hover {
+            transform: translateY(-5px); /* 悬停时上移 */
         }
         
         .maintainer img {
-          width: 100px;
-          height: 100px;
-          border-radius: 50%;
-          object-fit: cover;
+            width: 120px; /* 增加图片大小 */
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #007bff; /* 添加边框 */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 图片阴影 */
         }
         
         .maintainer span {
-          display: block;
-          margin-top: 5px;
+            display: block;
+            margin-top: 10px; /* 增加间距 */
+            font-size: 16px; /* 增大字体 */
+            color: #333; /* 文字颜色 */
+            font-weight: 500; /* 加粗字体 */
+        }
+        
+        .maintainer a {
+            text-decoration: none; /* 去掉链接下划线 */
+            color: inherit; /* 继承文字颜色 */
+        }
+        
+        .maintainer a:hover {
+            color: #007bff; /* 悬停时改变文字颜色 */
         }
         
         /* 高亮样式 */
@@ -210,7 +234,6 @@
               <span>@Shiya Su</span>
             </a>
           </div>
-    
         </div>
       </div>
     </section>
